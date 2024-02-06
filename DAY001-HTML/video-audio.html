@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>비디오 실습</h2>
+    <video width="320" height="240" controls autoplay poster="/img/video-bg.png">
+        <source src="LupinRun.mp4" type="video/mp4"/>
+    </video>
+
+    <!-- iframe 태그는 외부 링크 주소 리소스를 내 웹페이지에 삽입해주는 기능 제공 -->
+    <div style="width:500px;height:350px;">
+        <iframe
+        src="https://www.youtube.com/embed/JuOCKHbQqqg" 
+        title="sub) 🇬🇧 영국 유학생 브이로그ㅣ주말엔 도서관ㅣ집에서도 공부ㅣ양배추볶음밥, 연어 아보카도 랩ㅣ시험결과!ㅣ장 보기" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+        </iframe>
+    </div>
+    
+
+    <h2>오디오 실습</h2>
+    <audio controls>
+        <source src="Kalimba.mp3" type="audio/mpeg"/>
+        <source src="Kalimba.ogg" type="audio/ogg"/>
+    </audio>
+</body>
+</html>
