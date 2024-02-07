@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        main {
+            position: relative;
+            width: 500px;
+            height: 600px;
+            background-color: #222222;
+        }
+
+        div {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #000;
+            background-color: #999999;
+            text-align: center;
+            line-height: 100px;
+            box-sizing: border-box;
+        }
+/* 
+        div:nth-of-type(2){
+            position:static;
+            background-color: bisque;
+            opacity: 0.3;
+
+        } */
+
+        /* div:nth-of-type(2){
+            position:relative;
+            top:30px;
+            left:30px;
+            background-color: bisque;
+            opacity: 0.3;
+
+        } */
+
+        /* div:nth-of-type(2){
+            position:absolute;
+            top:30px;
+            left:30px;
+            background-color: bisque;
+            opacity: 0.3;
+
+        } */
+
+        div:nth-of-type(2){
+            position:fixed;
+            bottom: 5px;
+            right: 5px;
+            background-color: bisque;
+            opacity: 0.3;
+        }
+
+
+    </style>
+</head>
+<body>
+    <main>
+        <div>상단 영역</div>
+        <div>중간 영역</div>
+        <div>하단 영역</div>
+    </main>
+</body>
+</html>

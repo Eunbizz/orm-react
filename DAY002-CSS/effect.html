@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            background-image:url(./code.jpg);
+            border-radius:100px;
+            width:200px;
+            height:200px;
+        }
+        .linear{
+            width:200px;
+            height:200px;
+            background:linear-gradient(45deg, red, yellow, green, blue);
+        }
+        .box{
+            width:200px;
+            height:200px;
+            background-color:yellow;
+            box-shadow:10px 10px 10px 10px rgba(0,0,0,0.5);
+        }
+        .translate{
+            transform: translate(20px, 100px)
+        }
+        .rotate{
+            transform: rotate(50deg);
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1>배경이미지 둥글게 표시</h1>
+    <p></p>
+
+    <h1>그라데이션</h1>
+    <div class="linear"></div>
+
+    <h1>그림자 효과</h1>
+    <div class="box">그림자 효과</div>
+
+    <div class="translate">원래 위치에서 특정 위치로 이동시키기</div>
+    <div class="rotate">회전</div>
+</body>
+</html>
