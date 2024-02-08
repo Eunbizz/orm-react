@@ -1,0 +1,113 @@
+
+html {
+    font-size:12px
+}
+
+.image {
+    height:32px;
+}
+
+.logo {
+    margin: 0 0 0 10px;
+}
+
+input {
+    border-radius: 0;
+    border: none;
+    background: 0 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form_section {
+    padding: 0 20px
+}
+
+
+.form_list {
+    position: relative;
+    margin-bottom: 10px;
+    border-radius: 6px
+}
+
+.form_list::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    border: 1px solid #c6c6c6;
+    pointer-events: none;
+    content: ''
+}
+
+.form_item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-height: 50px;
+    padding: 0 10px 0 45px
+}
+
+.form_item:first-of-type {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px
+}
+
+.form_item:last-of-type {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px
+}
+
+.input {
+    flex: 1 1 auto;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+    line-height: 22px;
+    color: #222
+}
+.form_item::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    border: 1px solid #dfdfdf;
+    pointer-events: none;
+    content: ''
+}
+
+.form_item .id_naver {
+    flex: none;
+    padding: 0 4px 0 6px;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: -.2px;
+    color: #767678
+}
+
+.btn_submit_wrap {
+    flex: none;
+    padding: 20px
+}
+
+.btn_submit {
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,.05);
+    background: #09aa5c;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    color: #fff
+}
