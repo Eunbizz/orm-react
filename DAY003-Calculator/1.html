@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="calculator">
+        <div class="calculator-display">
+            <div class="point">
+                <div id="red">⦁</div>
+                <div id="yellow">⦁</div>
+                <div id="green">⦁</div>
+            </div>
+            <div class="zero">
+                <input type="text" id="display" readonly>
+            </div>
+        </div>
+        <div class="calculator-button">
+            <div class="button-row">
+                <button class="clear" data-type="ac">AC</button>
+                <button class="positive-negative" disabled>+/-</button>
+                <button class="percentage" disabled>%</button>
+                <button class="operator" data-type="operator">÷</button>
+            </div>
+            <div class="button-row">
+                <button class="number" data-type="number">7</button>
+                <button class="number" data-type="number">8</button>
+                <button class="number" data-type="number">9</button>
+                <button class="operator" data-type="operator">×</button>
+            </div>
+            <div class="button-row">
+                <button class="number" data-type="number">4</button>
+                <button class="number" data-type="number">5</button>
+                <button class="number" data-type="number">6</button>
+                <button class="operator" data-type="operator">−</button>
+            </div>
+            <div class="button-row">
+                <button class="number" data-type="number">1</button>
+                <button class="number" data-type="number">2</button>
+                <button class="number" data-type="number">3</button>
+                <button class="operator" data-type="operator">+</button>
+            </div>
+            <div class="button-row last">
+                <button class="number" id="border-bottom-left" data-type="number">0</button>
+                <button class="decimal" data-type="decimal">.</button>
+                <button class="calculate" id="border-bottom-right" data-type="equals">=</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    class Calculator {
+        constructor(displayElement) {
+            this.displayElement = displayElement[0].querySelector('input');
+            this.displayContent = '';
+            this.operatorCheck = true; // 초기값 숫자 입력 전 연산자 입력 불가
+            this.equalsCheck = false;
+            this.clear();
+        }
+
+        appendNumber(number) {
+            if (this.equalsCheck) {
+                this.displayContent = number;
+                this.equalsCheck = false;
+            } else {
+                this.displayContent += number;
+            }
+            this.operatorCheck = false;
+            this.updateDisplay();
+        }
+
+        appendOperator(operator) {
+            if (this.operatorCheck) return false;
+            if (this.equalsCheck) this.equalsCheck = false;
+            this.displayContent += operator;
+            this.operatorCheck = true;
+            this.updateDisplay();
+        }
+
+        updateDisplay() {
+            this.displayElement.value = this.displayContent;
+        }
+
+        clear() {
+            this.displayContent = '';
+            this.displayElement.value = '0';
+            this.operatorCheck = true;
+        }
+
+        compute() {
+            if (this.operatorCheck) return;
+            this.displayContent = eval(this.displayContent
+                .replace('÷', '/')
+                .replace('×', '*')
+            );
+            this.equalsCheck = true;
+            this.updateDisplay();
+        }
+    }
+
+    const buttons = document.querySelectorAll('button');
+    const displayElement = document.getElementsByClassName("zero");
+
+    const calculator = new Calculator(displayElement);
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const buttonType = button.getAttribute('data-type');
+            const buttonValue = button.innerText;
+
+            switch (buttonType) {
+                case 'number':
+                    calculator.appendNumber(buttonValue);
+                    break;
+                case 'operator':
+                    calculator.appendOperator(buttonValue);
+                    break;
+                case 'ac':
+                    calculator.clear();
+                    break;
+                case 'equals':
+                    calculator.compute();
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>
