@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>구구단</title>
+    <style>
+        .table-group {
+            display: flex;
+            justify-content: space-around; /* 테이블 사이의 공간을 균등하게 배분 */
+            flex-wrap: wrap; /* 필요한 경우 새로운 줄로 넘김 */
+        }
+        table {
+            border-collapse: collapse;
+            margin: 10px; /* 테이블 사이의 간격 */
+        }
+        th, td {
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="tableGroup1" class="table-group"></div> <!-- 2~5단을 위한 컨테이너 -->
+<div id="tableGroup2" class="table-group"></div> <!-- 6~9단을 위한 컨테이너 -->
+
+<script>
+function createMultiplicationTable(start, end, containerId) {
+    let container = document.getElementById(containerId);
+    for (let i = start; i <= end; i++) {
+        let tableHTML = "<table>";
+        tableHTML += "<thead><tr><th>" + i + "단" + "</th></tr></thead><tbody>";
+        for (let j = 1; j <= 9; j++) {
+            tableHTML += "<tr><td>" + i + "*" + j + "=" + (i * j) + "</td></tr>";
+        }
+        tableHTML += "</tbody></table>";
+        container.innerHTML += tableHTML; // 각 구구단 테이블을 지정된 컨테이너에 추가
+    }
+}
+
+// 2~5단 구구단 생성 및 첫 번째 컨테이너에 추가
+createMultiplicationTable(2, 5, "tableGroup1");
+// 6~9단 구구단 생성 및 두 번째 컨테이너에 추가
+createMultiplicationTable(6, 9, "tableGroup2");
+</script>
+
+</body>
+</html>
