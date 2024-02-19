@@ -6,6 +6,8 @@ import React, { useState } from 'react'
 import FChild from './FunctionChild'
 import CChild from './ClassChild'
 import MyProfile from './Profile'
+import CounterFunctionComponent from './CounterFunctionComponent'
+import CounterClassComponent from './CounterClassComponent'
 
 // 함수형 컴포넌트
 // 리액트 UI 컴포넌트는 반환값으로 JSX UI 요소 정보를 반환하여 최종 웹브라우저에 UI 표현
@@ -40,6 +42,8 @@ function App() {
             <MyProfile userId={user.userId} name={user.name} email={user.email} tel={user.tel} age={30}>
                 내 소개
             </MyProfile>
+            <CounterFunctionComponent></CounterFunctionComponent>
+            <CounterClassComponent></CounterClassComponent>
         </div>
     )
 }
