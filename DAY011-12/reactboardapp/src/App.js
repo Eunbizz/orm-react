@@ -50,7 +50,6 @@ function App() {
         <ArticleManager
           board={board}
           setBoard={setBoard}
-          boardList={boardList}
           onRegister={onRegister}
           onUpdate={onUpdate}
           onRemove={onRemove}
