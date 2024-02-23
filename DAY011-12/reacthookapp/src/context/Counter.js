@@ -6,7 +6,8 @@ import { AppContext } from "../App";
 
 const Counter = () => {
   // 전역 카운터 데이터 값 추출
-  const count = useContext(AppContext);
+  // useContext는 배열을 반환하고 배열 첫번째 값에 value 반환
+  const [count] = useContext(AppContext);
 
   return (
     <div>
