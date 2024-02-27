@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// useHistory로 개발자가 원하는 라우팅 주소 URL을 호출해서 해당 컴포넌트를 렌더링시킴
 import { useNavigate } from "react-router-dom";
 
 const ArticleRegist = () => {

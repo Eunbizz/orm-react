@@ -13,6 +13,9 @@ import Footer from "./components/Footer";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ArticleList from "./pages/ArticleList";
+import ArticleRegist from "./pages/ArticleRegist";
+import ArticleDetail from "./pages/ArticleDetail";
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
               <Route path="/" Component={Main} />
               <Route path="/signin" Component={Login} />
               <Route path="/signup" Component={Register} />
+              <Route path="/article/list" Component={ArticleList} />
+              <Route path="/article/regist" Component={ArticleRegist} />
+              <Route path="/article/detail/:idx" Component={ArticleDetail} />
             </Routes>
           </div>
         </div>

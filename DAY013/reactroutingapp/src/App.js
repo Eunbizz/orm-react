@@ -64,7 +64,7 @@ function App() {
           <Route path="/entry" Component={Entry} />
 
           <Route path="/article/list" Component={ArticleList} />
-          <Route path="/article/detail" Component={ArticleDetail} />
+          <Route path="/article/detail/:idx" Component={ArticleDetail} />
           <Route path="/article/regist" Component={ArticleRegist} />
 
           <Route path="/product/detail" Component={Product} />
