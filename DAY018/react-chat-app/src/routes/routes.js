@@ -18,7 +18,7 @@ const authProtectedRoutes = [
 ];
 
 const publicRoutes = [
-  { path: "/signin", component: <Login /> },
+  { path: "/login", component: <Login /> },
   { path: "/signup", component: <Register /> },
 ];
 

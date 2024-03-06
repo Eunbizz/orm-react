@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -50,6 +52,17 @@ const Register = () => {
         name: values.username,
         password: values.password,
       };
+
+      axios
+        .post("http://localhost:3005/api/member/entry", memberData)
+        .then((res) => {
+          console.log("회원가입 처리 결과 반환값", res.data);
+          alert("등록완료");
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 

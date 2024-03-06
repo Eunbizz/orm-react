@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 //reactstrap은 bootstrap을 react에서 더 쉽게 사용하기 위한 부트스트랩 지원 리액트 패키지
 import {
@@ -19,6 +19,8 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 
+import axios from "axios";
+
 //formik은 리액트에서 form을 다루는 코드들을 쉽게 작성할 수 있도록 도와주는 패키지
 import { useFormik } from "formik";
 
@@ -32,6 +34,9 @@ import logolight from "../../assets/images/logo-light.png";
 const Login = (props) => {
   const navigate = useNavigate();
 
+  // error 메시지
+  const [errorMsg, setErrorMsg] = useState("");
+
   //폼 유효성검사 및 폼데이터처리
   const formik = useFormik({
     initialValues: {
@@ -42,6 +47,7 @@ const Login = (props) => {
       email: Yup.string().required("Please Enter Your Username"),
       password: Yup.string().required("Please Enter Your Password"),
     }),
+    // initialValues의 파라미터를 values로 받음
     onSubmit: (values) => {
       //props.loginUser(values.email, values.password, props.router.navigate);
 
@@ -53,6 +59,26 @@ const Login = (props) => {
         email: values.email,
         password: values.password,
       };
+      axios
+        .post("http://localhost:3005/api/member/login", loginData)
+        .then((res) => {
+          console.log("회원 로그인 처리 결과 반환값", res.data);
+
+          if (res.data.code === "200") {
+            // 1. 사용자 웹브라우저 저장공간인 localStorage에 토큰값을 저장
+            window.localStorage.setItem("jwttoken", res.data.data);
+
+            navigate("/dashboard");
+
+            // 참고: 로컬 스토리지 공간에 저장된 토큰값 불러오기
+            const storageToken = window.localStorage.getItem("jwttoken");
+          } else {
+            setErrorMsg(res.data.result);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 
@@ -88,8 +114,10 @@ const Login = (props) => {
 
               <Card>
                 <CardBody className="p-4">
-                  {props.error && <Alert color="danger">{props.error}</Alert>}
+                  {/* {props.error && <Alert color="danger">{props.error}</Alert>} */}
+                  {errorMsg && <Alert color="danger">{errorMsg}</Alert>}
                   <div className="p-3">
+                    {/*  버튼 누르면 formik의 onSubmit 호출 */}
                     <Form onSubmit={formik.handleSubmit}>
                       <div className="mb-3">
                         <Label className="form-label">Username</Label>

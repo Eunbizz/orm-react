@@ -10,15 +10,15 @@ import { authProtectedRoutes, publicRoutes } from "./routes";
 import NonAuthLayout from "../layouts/NonAuthLayout";
 import AuthLayout from "../layouts/AuthLayout";
 
-// 로그인 여부를 체크한 후 인증되었을 때만 보여줄 주소 호출한 경우 로그인 페이지 반환
-const AuthProtected = (props) => {
-  // 현재 호출하는 페이지가 보호되는 페이지거나 로그인한 사용자 JWT 토큰이 없을 경우
-  if (props.isAuthProtected && localStorage.getItem("authUser")) {
-    return (
-      <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
-    );
-  }
-};
+// // 로그인 여부를 체크한 후 인증되었을 때만 보여줄 주소 호출한 경우 로그인 페이지 반환
+// const AuthProtected = (props) => {
+//   // 현재 호출하는 페이지가 보호되는 페이지거나 로그인한 사용자 JWT 토큰이 없을 경우
+//   if (props.isAuthProtected && localStorage.getItem("authUser")) {
+//     return (
+//       <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
+//     );
+//   }
+// };
 
 // 메인 라우팅 컴포넌트 구현
 const Routes = () => {
