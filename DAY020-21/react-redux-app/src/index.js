@@ -13,11 +13,14 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 // 리액트 스토어 참조
-import store from "./redux/store";
+// import store from "./redux/store";
+
+// Redux Saga 사용시 스토어 구성
+import { configureStore } from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
+  <Provider store={configureStore()}>
     <BrowserRouter>
       <App />
     </BrowserRouter>

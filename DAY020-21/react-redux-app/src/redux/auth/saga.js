@@ -9,10 +9,10 @@ import { LOGIN_USER, API_FAILED } from "../../constants/actionTypes";
 
 // 액션함수 참조
 // 회원로그인 처리 액션함수 참조
-import { loginUser, apiError } from "../actions";
+import { userLogin, apiError } from "../actions";
 
 // 백엔드 Restful 통신을 위한 APIClient post 메소드(create()) 함수 생성
-const create = new APIClient().create();
+const create = new APIClient().create;
 
 // 로그인 백엔드 통신 처리를 위한 제너레이터 함수 정의
 // 로그인처리 SAGA 제너레이터 함수
@@ -30,7 +30,7 @@ function* login({ payload: { email, password, navigate } }) {
 
     // 전역 스토어에 로그인 사용자 정보값 반영하기
     // put(실행하고자 하는 액션함수 지정) // 스토어의 전역 상태값 변경처리함
-    yield put(loginUser(response.data.token, response.data.loginUser));
+    yield put(userLogin(response.data.token, response.data.loginUser));
 
     // 특정 페이지로 이동처리
     navigate("/dashboard");
