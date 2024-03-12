@@ -10,6 +10,9 @@ import Chats from "./Tabs/Chats";
 
 import Groups from "./Tabs/Groups";
 
+import Contacts from "./Tabs/Contacts";
+
+// subscribe 하기 위해 connect 참조
 import { connect } from "react-redux";
 
 //리덕스 전역상태값중 레이아웃 속성 전역값을 보관하는 레이아웃 속성값중 선택탭의 값을 변경적용하는 setActiveTab 액션함수 참조하기
@@ -19,11 +22,6 @@ const ChatLeftSidebar = (props) => {
   //현재 전역메뉴 선택된 탭아이디 정보조회-리덕스 전역데이터에서 호출(Layout리듀서에서)
   //채팅 탭 선택 기능을 아래 변수에 선택 적용해서 컴포넌트를 선택해 출력할수 있습니다.
   const activeTab = props.activeTab;
-  //const activeTab = "profile"; //props.activeTab;
-  //const activeTab = "chat";
-  //const activeTab = "group";
-  // const activeTab = "contacts";
-  // const activeTab = "settings";
 
   return (
     <React.Fragment>
@@ -41,11 +39,11 @@ const ChatLeftSidebar = (props) => {
             <Groups />
           </TabPane>
 
-          {/* <TabPane tabId="contacts" id="pills-contacts">
+          <TabPane tabId="contacts" id="pills-contacts">
             <Contacts />
           </TabPane>
 
-          <TabPane tabId="settings" id="pills-setting">
+          {/* <TabPane tabId="settings" id="pills-setting">
             <Settings />
           </TabPane> */}
         </TabContent>
@@ -55,9 +53,8 @@ const ChatLeftSidebar = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.Layout,
-  };
+  const { activeTab } = state.Layout;
+  return { activeTab };
 };
 
 // export default ChatLeftSidebar;

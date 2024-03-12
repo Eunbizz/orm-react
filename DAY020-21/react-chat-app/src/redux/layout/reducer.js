@@ -1,5 +1,9 @@
 // 액션 타입 참조
-import { SET_ACTIVE_TAP } from "../../constants/actionTypes";
+import {
+  SET_ACTIVE_TAP,
+  OPEN_USER_PROFILE_SIDEBAR,
+  SET_LAYOUT_MODE,
+} from "../../constants/actionTypes";
 
 // store에 생성할 기본 전역데이터 구조 정의하고 초기값 설정
 const INIT_STATE = {
@@ -19,6 +23,10 @@ const Layout = (state = INIT_STATE, action) => {
         ...state,
         activeTab: action.payload,
       };
+    case OPEN_USER_PROFILE_SIDEBAR:
+      return { ...state, userSidebar: true };
+    case SET_LAYOUT_MODE:
+      return { ...state, layoutMode: action.payload };
     default:
       return state;
   }

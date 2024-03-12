@@ -19,7 +19,7 @@ import classnames from "classnames";
 
 //connect함수는 해당 컴포넌트를 전역상태저장소(스토어)와 연결하고 그안에 저장된 각각의 전역상태값들을 컴포넌트와 연동해 사용하게해준다.
 //connect(mapStateToProps, mapDispatchToProps)(Home);
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 //리덕스 전역상태값중 레이아웃 속성 전역값을 보관하는 레이아웃 속성값중 선택탭의 값을 변경적용하는 setActiveTab 액션함수 참조하기
 import { setActiveTab } from "../redux/actions";
@@ -269,16 +269,11 @@ const LeftSidebarMenu = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.Layout,
-  };
-};
-
 // export default LeftSidebarMenu;
 
 //connect(mapStateToProps, mapDispatchToProps)(Home);
+// connect(전역데이터속성을 props 하위 속성으로 넣어주는 함수 호출, {액션함수})(현재컴포넌트)
 //mapStateToProps함수의 용도는 리덕스 전역상태공간에 저장된 특정 전역 데이터 (Layout) 값을 가져와
 //현재 컴포넌터의 props의 하위속성으로 값을 제공합니다.
 //mapDispatchToProps는 전역공간의 특정 상태값을 변경해주는 액션함수를 현재 컴포넌트의 props에 하위속성으로 제공합니다.
-export default connect(mapStateToProps, { setActiveTab })(LeftSidebarMenu);
+export default connect(null, { setActiveTab })(LeftSidebarMenu);
