@@ -72,11 +72,6 @@ const Index = (props) => {
 
   //전역데이터 공간에 메시지 서버로부터 전송된 수신데이터값이 변경될떄마다 특정기능 실행하기
   useEffect(() => {
-    console.log(
-      "====>신규 메시지 수신 전역데이터 변경===> ",
-      props.receiveMessage
-    );
-
     //채팅이력에 신규메시지를 출력하는 함수 호출
     addMessage(props.receiveMessage, "textMessage");
   }, [props.receiveMessage]);

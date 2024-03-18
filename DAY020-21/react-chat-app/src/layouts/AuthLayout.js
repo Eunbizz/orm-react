@@ -88,8 +88,8 @@ const AuthLayout = (props) => {
 
 // 채팅 전역데이터 상태값을 props로 매핑
 const mapStateToProps = (state) => {
-  const { sendMessage, receiveMessage } = state.Chat;
-  return { sendMessage, receiveMessage };
+  const { sendMessage } = state.Chat;
+  return { sendMessage };
 };
 
 export default connect(mapStateToProps, { setReceiveMessage })(AuthLayout);
