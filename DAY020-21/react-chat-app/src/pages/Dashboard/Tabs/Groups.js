@@ -37,10 +37,14 @@ import avatar6 from "../../../assets/images/users/avatar-6.jpg";
 import avatar7 from "../../../assets/images/users/avatar-7.jpg";
 import avatar8 from "../../../assets/images/users/avatar-8.jpg";
 
-// 오리지널 데이터를 인덱스형태로 편집한 구조의 전역데이터
+//오리지널 데이터를 인덱스형태로 편집한 구조의 전역변수
 let sortedContacts = [
   {
     group: "A",
+    children: [{ id: 0, name: "Demo", isChecked: false }],
+  },
+  {
+    group: "B",
     children: [{ id: 0, name: "Demo", isChecked: false }],
   },
 ];

@@ -12,8 +12,6 @@ const jwt = require("jsonwebtoken");
 //db프로그래밍을 위한 ORM db객체 참조
 var db = require("../models/index");
 
-const moment = require("moment-timezone");
-
 //신규회원가입 정보처리 REST API 메소드
 //http://localhost:3005/api/member/entry
 router.post("/entry", async (req, res) => {
@@ -38,13 +36,13 @@ router.post("/entry", async (req, res) => {
       email,
       member_password: encryptedPassword,
       name,
-      profile_img_path: "",
+      profile_img_path: "http://localhost:3005/profile/avatar1.jpg",
       telephone: "",
       entry_type_code: 0,
       use_state_code: 1,
-      reg_date: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
+      reg_date: Date.now(),
       reg_member_id: 0,
-      edit_date: moment().tz("Asia/Seoul").format("YYYY-MM-DD"),
+      edit_date: Date.now(),
       edit_member_id: 0,
     };
 
@@ -109,7 +107,6 @@ router.post("/login", async (req, res) => {
           name: member.name,
           profile_img_path: member.profile_img_path,
           telephone: member.telephone,
-          reg_date: member.reg_date,
         };
 
         //사용자 정보를 담고 있는 JWT 사용자 인증토큰 생성완료
@@ -148,27 +145,11 @@ router.get("/profile", async (req, res) => {
   };
 
   try {
-    //STEP1: 현재 profile api를 호출하는 사용자 요청의
-    //httpHeader영역에서 Authorization내 JWT토큰값 존재여부 확인 및 추출
-    //'Bearer xdfdfdfdfdfd'
     const token = req.headers.authorization.split("Bearer ")[1];
     console.log("req헤더에 저장된 JWT 값 추출하기:", token);
-
-    //STEP2: JWT토큰이 헤더를 통해 전달이 안된경우 결과값 반환
-    // if(token == undefined){
-    //     apiResult.code ="400";
-    //     apiResult.data = "notprovidetoken";
-    //     apiResult.result = "인증토큰이 제공되지 않았습니다.";
-
-    //     return res.json(apiResult);
-    // }
-
-    //STEP3: 제공된 JWT토큰에서 사용자 메일주소를 추출한다.
     var tokenMember = jwt.verify(token, process.env.JWT_SECRET);
 
     console.log("JWT토큰내 저장된 사용자정보 확인하기", tokenMember);
-
-    //STEP4: 토큰에 저장된 메일주소로 DB에서 해당 사용자 최신정보를 조회합니다.
     var member = await db.Member.findOne({
       where: { email: tokenMember.email },
     });

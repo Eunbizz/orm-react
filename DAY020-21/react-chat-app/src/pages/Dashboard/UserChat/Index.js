@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import { connect } from "react-redux";
+import { setSendMessage, setReceiveMessage } from "../../../redux/actions";
+
 import {
   DropdownMenu,
   DropdownItem,
@@ -14,9 +17,6 @@ import {
 } from "reactstrap";
 
 import SimpleBar from "simplebar-react";
-
-//컴포넌트 라우팅 추가 바인딩
-import withRouter from "../../../components/withRouter";
 
 //Import Components
 
@@ -44,30 +44,42 @@ const Index = (props) => {
   const ref = useRef();
 
   const [modal, setModal] = useState(false);
+  const [chatMessages, setchatMessages] = useState([]);
 
-  //demo conversation messages
-  //userType must be required
-  const [allUsers] = useState(props.recentChatList);
-
-  const [chatMessages, setchatMessages] = useState(
-    props.recentChatList[props.active_user].messages
-  );
-
-  //채팅대상자 변경이나 채팅이력내용이 변경될때마다 실행되는 기능정의
+  // 컴포넌트가 처음 렌더링될 때 빈 배열로 초기화
   useEffect(() => {
-    setchatMessages(props.recentChatList[props.active_user].messages);
+    setchatMessages([]);
+    props.setSendMessage({
+      channel_id: 0,
+      member_id: 0,
+      name: "",
+      profile_url: "",
+      message: "",
+    });
+    props.setReceiveMessage({
+      channel_id: 0,
+      member_id: 0,
+      name: "",
+      profile_url: "",
+      message: "",
+    });
+  }, []);
 
-    ref.current.recalculate();
+  // 채널 변경시 마다 메시지 목록 초기화
+  useEffect(() => {
+    setchatMessages([]);
+  }, [props.currentChannel]);
 
-    if (ref.current.el) {
-      ref.current.getScrollElement().scrollTop =
-        ref.current.getScrollElement().scrollHeight;
-    }
+  //전역데이터 공간에 메시지 서버로부터 전송된 수신데이터값이 변경될떄마다 특정기능 실행하기
+  useEffect(() => {
+    console.log(
+      "====>신규 메시지 수신 전역데이터 변경===> ",
+      props.receiveMessage
+    );
 
-    setTimeout(() => {
-      scrolltoBottom();
-    }, 500);
-  }, [props.active_user, props.recentChatList]);
+    //채팅이력에 신규메시지를 출력하는 함수 호출
+    addMessage(props.receiveMessage, "textMessage");
+  }, [props.receiveMessage]);
 
   const toggle = () => setModal(!modal);
 
@@ -133,14 +145,6 @@ const Index = (props) => {
 
     //해당 채널의 채팅이력목록에  신규 채팅 메시지 데이터를 추가함
     setchatMessages([...chatMessages, messageObj]);
-
-    let copyallUsers = [...allUsers];
-
-    copyallUsers[props.active_user].messages = [...chatMessages, messageObj];
-    copyallUsers[props.active_user].isTyping = false;
-
-    //전체 사용자 목록 전역 데이터를 최신 데이터로 갱신해준다.
-    props.setFullUser(copyallUsers);
 
     //최신 메시지가 채팅이력 영역에 표시되면 스크롤바를 가장 하단이동시킴..
     scrolltoBottom();
@@ -485,4 +489,13 @@ const Index = (props) => {
   );
 };
 
-export default Index;
+const mapStateToProps = (state) => {
+  const { receiveMessage, currentChannel } = state.Chat;
+  const { userSidebar } = state.Layout;
+  const { token, loginUser } = state.Auth;
+  return { receiveMessage, currentChannel, userSidebar, token, loginUser };
+};
+
+export default connect(mapStateToProps, { setSendMessage, setReceiveMessage })(
+  Index
+);
