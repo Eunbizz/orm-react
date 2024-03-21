@@ -23,7 +23,7 @@ export default function RootLayout({
         <main className="flex min-h-screen flex-col items-center p-24">
           <Header />
 
-          <div className="mt-20">{children}</div>
+          <div className="mb-32 mt-10 grid lg:w-full">{children}</div>
         </main>
       </body>
     </html>
